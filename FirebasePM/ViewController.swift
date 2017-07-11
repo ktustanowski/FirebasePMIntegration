@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import DurationReporter
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        DurationReporter.end(event: "Application start", action: "Loading Home")
+        DurationReporter.begin(event: "Application start", action: "Preparing Home")
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -21,6 +24,8 @@ class ViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        DurationReporter.end(event: "Application start", action: "Preparing Home")
+        print(DurationReporter.generateReport()) /* needed to print the report - normally this would be handled differently 😉 */
     }
 
 }
