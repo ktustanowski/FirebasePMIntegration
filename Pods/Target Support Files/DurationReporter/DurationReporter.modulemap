@@ -1,0 +1,6 @@
+framework module DurationReporter {
+  umbrella header "DurationReporter-umbrella.h"
+
+  export *
+  module * { export * }
+}
