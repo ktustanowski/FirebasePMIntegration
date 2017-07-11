@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import FirebasePerformance
 
 class ViewController: UIViewController {
 
+    fileprivate var preparingHomeTrace: Trace?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        (UIApplication.shared.delegate as? AppDelegate)?.loadingHomeTrace?.stop()
+        
+        preparingHomeTrace = Performance.startTrace(name: "preparing home")
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -21,6 +27,8 @@ class ViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        preparingHomeTrace?.stop()
+        (UIApplication.shared.delegate as? AppDelegate)?.applicationStartTrace?.stop()
     }
 
 }
