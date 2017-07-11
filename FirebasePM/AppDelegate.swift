@@ -7,14 +7,27 @@
 //
 
 import UIKit
+import Firebase
+import FirebasePerformance
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    var applicationStartTrace: Trace?
+    var loadingHomeTrace: Trace?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        applicationStartTrace = Performance.startTrace(name: "application_start")
+        let loadingTrace = Performance.startTrace(name: "application_start_loading")
+        /* 
+         some initial processing 
+         */
+        loadingTrace?.stop()
+        loadingHomeTrace = Performance.startTrace(name: "application_start_loading_home")
         return true
     }
 
